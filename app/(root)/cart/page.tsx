@@ -126,12 +126,12 @@ const Cart = () => {
       {/* Left Section */}
       <div className="w-2/3 max-lg:w-full">
         <div className="flex items-center justify-between">
-          <p className="text-heading3-bold">Shopping Cart</p>
+          <p className="text-heading3-bold">Panier</p>
         </div>
         <hr className="my-6" />
 
         {cart.cartItems.length === 0 ? (
-          <p className="text-body-bold">No items in cart</p>
+          <p className="text-body-bold">Aucun article dans le panier</p>
         ) : (
           <div className="bg-white bg-opacity-20 rounded-md">
 
@@ -215,17 +215,19 @@ const Cart = () => {
       {/* Right Section */}
       <div className="w-1/3 max-lg:w-full flex flex-col gap-8 bg-grey-1 bg-opacity-40 rounded-lg px-4 py-5">
         <p className="text-heading4-bold pb-4">
-          Summary <span>{`(${cart.cartItems.length} ${cart.cartItems.length > 1 ? "items" : "item"})`}</span>
+          Sommaire <span>{`(${cart.cartItems.length} ${cart.cartItems.length > 1 ? "articles" : "article"})`}</span>
         </p>
 
         <div className="flex justify-between text-body-semibold">
           <span>Total : </span>
           <span>{formatDZD(totalRounded)}</span>
+          <span>Livraison : </span>
+          <span>400 DA </span>
         </div>
 
         <CheckoutForm ref={checkoutRef} getdata={getdata} />
         {cart.cartItems.length !== 0 ? <button
-          className="border rounded-lg text-body-bold hover:bg-[#72cc69] bg-[#ffc476] py-3 w-full  text-white disabled:opacity-50 disabled:cursor-not-allowed"
+          className="border rounded-lg text-body-bold hover:bg-[#ffc476] bg-[#72cc69]  py-3 w-full  text-white disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={handleChildCheckoutClick}
           disabled={isSubmitting}
         >
@@ -237,7 +239,7 @@ const Cart = () => {
           <button
             className="border rounded-lg text-body-bold bg-red-600 py-3 w-full hover:bg-[#72cc69] text-white disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Panier vide
+            Votre panier est vide
           </button>}
 
 

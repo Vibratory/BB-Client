@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -27,6 +27,8 @@ const Navbar = () => {
   const [categoryMenu, setCategoryMenu] = useState(false);
   const [collections, setCollections] = useState([]);
   const [query, setQuery] = useState("");
+  const categoryMenuRef = useRef<HTMLDivElement>(null);
+  const dropdownMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchCollections = async () => {
@@ -36,6 +38,39 @@ const Navbar = () => {
     fetchCollections();
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+
+      if (
+        categoryMenuRef.current &&
+        !categoryMenuRef.current.contains(target)
+      ) {
+        setCategoryMenu(false);
+      }
+
+      if (
+        dropdownMenuRef.current &&
+        !dropdownMenuRef.current.contains(target)
+      ) {
+        setDropdownMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+
+  useEffect(() => {
+    setCategoryMenu(false);
+    setDropdownMenu(false);
+  }, [pathname]);
+
+
   return (
     <div className="sticky top-0 z-30 py-2 px-10 flex gap-2 justify-between items-center max-sm:px-2 bg-[#77c0bf]">
       {/* Logo */}
@@ -44,7 +79,7 @@ const Navbar = () => {
       </Link>
 
       {/* Mobile Logo */}
-       <Link href="/" className="lg:hidden md:hidden">
+      <Link href="/" className="lg:hidden md:hidden">
         <Image src="/logo-sm.png" alt="logo" width={70} height={90} />
       </Link>
 
@@ -59,13 +94,20 @@ const Navbar = () => {
         </Link>
 
         {/* Category Menu */}
-        <div className="relative ">
+        <div ref={categoryMenuRef}
+          className="relative " >
+
           <p
             className="cursor-pointer text-white hover:text-[#29465b]"
-            onClick={() => setCategoryMenu(!categoryMenu)}
-          >Catégories</p>
+            onClick={() => setCategoryMenu(!categoryMenu)}>
+
+            Catégories
+
+          </p>
+
           {categoryMenu && (
-            <div className="absolute top-12 right-0 flex flex-col gap-2 p-3 rounded-lg border bg-[#77c0bf] text-base-bold shadow-lg z-50">
+            <div className="absolute top-12 right-0 flex flex-col gap-2 p-3 rounded-lg border bg-[#77c0bf] text-base-bold shadow-lg z-50"
+            >
               {collections.length === 0 ? (
                 <p className="text-white">No categories found</p>
               ) : (
@@ -131,9 +173,11 @@ const Navbar = () => {
         <Menu
           className="cursor-pointer lg:hidden"
           onClick={() => setDropdownMenu(!dropdownMenu)}
+
         />
         {dropdownMenu && (
-          <div className="absolute top-12 right-5 flex flex-col gap-4 p-3 rounded-lg border bg-[#77c0bf] text-base-bold lg:hidden">
+          <div ref={dropdownMenuRef}
+            className="absolute top-12 right-5 flex flex-col gap-4 p-3 rounded-lg border bg-[#77c0bf] text-base-bold lg:hidden">
             <Link href="/" className="text-white hover:text-[#29465b]">Accueil
             </Link>
             <Link href={user ? "/wishlist" : "/sign-in"} className="text-white hover:text-[#29465b]">Wishlist</Link>

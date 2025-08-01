@@ -25,7 +25,7 @@ const Footer = () => {
         {/* Map */}
         <div className="w-full h-[100px] md:h-[200px] overflow-hidden rounded-xl ">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9919.187291941893!2d5.426885955776571!3d36.20058278713007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12f315b602d7d4ab%3A0x659efa52e3d6d2e0!2sRais%20Mall!5e1!3m2!1sen!2sdz!4v1753446087974!5m2!1sen!2sdz"
+            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3060.0349562150773!2d5.423741775811344!3d36.20730587242215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzbCsDEyJzI2LjMiTiA1wrAyNSczNC43IkU!5e1!3m2!1sen!2sdz!4v1753962617199!5m2!1sen!2sdz"
             width="100%"
             height="100%"
             style={{ border: 0 }}

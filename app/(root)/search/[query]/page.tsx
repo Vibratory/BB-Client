@@ -1,7 +1,5 @@
-import ProductCard from '@/components/ProductCard'
 import { getSearchedProducts } from '@/lib/actions/actions'
 import { SortedFiltered } from '@/components/FilterSortProducts'
-import Footer from '@/components/Footer'
 
 const SearchPage = async ({ params }: { params: { query: string } }) => {
   const searchedProducts = await getSearchedProducts(params.query)
