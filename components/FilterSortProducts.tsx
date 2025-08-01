@@ -2,7 +2,6 @@
 import { useState } from "react";
 import ProductCard from "@/components/ProductCard";
 import { boolean } from "zod/v4-mini";
-import Footer from "./Footer";
 
 type SortedFilteredProps = {
   products: ProductType[];
@@ -79,7 +78,7 @@ export const SortedFiltered = ({ products }: SortedFilteredProps) => {
           onChange={(e) => setFilterBySale(e.target.checked)}
           className="h-4 w-4 accent-orange-500"
         />
-        <span>Solde</span>
+        <span className="text-red-600">% Solde %</span>
       </label>
     </div>
   );

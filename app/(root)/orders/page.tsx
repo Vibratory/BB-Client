@@ -104,24 +104,24 @@ const Orders = () => {
 
 
 
-  if (loading) return <p>Loading orders...</p>;
+  if (loading) return <p>Chargement des commandes...</p>;
 
   return (
     <div className="px-10 py-5 max-sm:px-3">
-      <p className="text-heading3-bold my-10">Your Orders</p>
+      <p className="text-heading3-bold my-10">Votre Commandes</p>
       {orders.length === 0 && (
-        <p>You have no orders yet.</p>
+        <p>Aucune commandes ...</p>
       )}
 
       <div className="flex flex-col gap-10 bg-white bg-opacity-20">
         {orders.map((order: OrderType) => (
           <div key={order._id} className="flex flex-col gap-8 p-4 ">
             <div className="flex gap-20 max-md:flex-col max-md:gap-3">
-              <p className="text-base-bold">Order ID: {order._id}</p>
+              <p className="text-base-bold">Commande ID: {order._id}</p>
 
 
               <p className="text-base-bold">
-                Total Amount: {formatDZD(
+                Total : {formatDZD(
                   order.products.reduce((acc, orderItem) => {
                     const { price, newprice, solde } = orderItem.product;
                     const effectivePrice = solde && newprice ? newprice : price;
@@ -154,20 +154,20 @@ const Orders = () => {
                     />
                     <div className="flex flex-col justify-between">
                       <p className="text-small-medium">
-                        Title: <span className="text-small-bold">{orderItem.product.title}</span>
+                        Titre : <span className="text-small-bold">{orderItem.product.title}</span>
                       </p>
                       {orderItem.color && (
                         <p className="text-small-medium">
-                          Color: <span className="text-small-bold">{orderItem.color}</span>
+                          Couleur : <span className="text-small-bold">{orderItem.color}</span>
                         </p>
                       )}
                       {orderItem.size && (
                         <p className="text-small-medium">
-                          Size: <span className="text-small-bold">{orderItem.size}</span>
+                          Taille : <span className="text-small-bold">{orderItem.size}</span>
                         </p>
                       )}
                       <p className="text-small-medium">
-                        Unit price:{" "}
+                        Prix unité :{" "}
                         <span className="text-small-bold">
                           <Price
                             price={orderItem.product.price}
@@ -177,7 +177,7 @@ const Orders = () => {
                         </span>
                       </p>
                       <p className="text-small-medium">
-                        Quantity: <span className="text-small-bold">{orderItem.quantity}</span>
+                        Quantité: <span className="text-small-bold">{orderItem.quantity}</span>
                       </p>
                     </div>
                   </div>
@@ -189,7 +189,7 @@ const Orders = () => {
                 className="bg-red-600 text-white rounded-lg w-full sm:w-48 h-10 "
                 onClick={() => handleCancel(order.status, order._id)}
               >
-                Cancel order
+                Annulé la commande
               </button>
             </div>
           </div>

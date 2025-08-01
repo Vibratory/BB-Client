@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useSearchParams } from 'next/navigation';
 import { CheckmarkIcon } from "react-hot-toast";
-import Footer from "@/components/Footer";
 
 const SuccessfulPayment = () => {
   const params = useSearchParams();
@@ -42,9 +41,9 @@ const SuccessfulPayment = () => {
         href="/"
         className="p-4 border text-base-bold bg-black text-white"
       >
-        RETOUR À L'ACCUEIL  
-            </Link>
- 
+        RETOUR À L'ACCUEIL
+      </Link>
+
     </div>
   );
 };

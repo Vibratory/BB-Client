@@ -18,7 +18,7 @@ const Collections = async () => {
       
 
       {!collections || collections.length === 0 ? (
-        <p className="text-body-bold">No categories found</p>
+        <p className="text-body-bold">Aucune catégorie trouvé</p>
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:flex sm:flex-wrap sm:justify-center sm:gap-x-6">
           {collections.map((collection: CollectionType) => (

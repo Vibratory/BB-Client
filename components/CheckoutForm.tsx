@@ -32,7 +32,7 @@ const CheckoutForm = forwardRef(({ getdata }: CheckoutFormProps, ref) => {
     submit: () => {
       handleSubmit((data) => {
         getdata(data);
-        //reset(); 
+        reset(); 
       })();
     },
   }));
