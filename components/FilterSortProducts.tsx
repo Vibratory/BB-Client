@@ -78,7 +78,7 @@ export const SortedFiltered = ({ products }: SortedFilteredProps) => {
           onChange={(e) => setFilterBySale(e.target.checked)}
           className="h-4 w-4 accent-orange-500"
         />
-        <span className="text-red-600">% Solde %</span>
+        <span className="text-red-600 text-body-bold">% Solde %</span>
       </label>
     </div>
   );

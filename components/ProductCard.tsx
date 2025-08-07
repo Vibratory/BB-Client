@@ -23,6 +23,7 @@ const ProductCard = ({ product, updateSignedInUser }: ProductCardProps) => {
 
   const [inStock, setInStock] = useState(true);
   const isCollection = path.includes("collections")
+  const isSearch = path.includes("search")
 
   //check if any item has a variant in stock if it has at least one then its not out of stock also checks hidden
   useEffect(() => {
@@ -65,7 +66,7 @@ const ProductCard = ({ product, updateSignedInUser }: ProductCardProps) => {
           <div className=" relative ">
 
             {/* DIV Frame above image (acts as a container for custom border elements) */}
-            {!isCollection ? <div
+            {!isCollection && !isSearch ? <div
               className="absolute z-20 pointer-events-none"
               style={{
                 top: "10px",
@@ -130,7 +131,7 @@ const ProductCard = ({ product, updateSignedInUser }: ProductCardProps) => {
               }
             </div>
 
-            <div className=" max-sm:w-64 rounded-xl  shadow-sm p-4 bg-white bg-opacity-20 relative ">
+            <div className=" max-sm:w-fit  rounded-xl  shadow-sm p-4 bg-white bg-opacity-20 relative ">
               {/*card*/}
 
               {/* Product Info */}
@@ -141,22 +142,30 @@ const ProductCard = ({ product, updateSignedInUser }: ProductCardProps) => {
                 <p className="text-small-medium text-grey-2 font-open-sans">
                   {product.category}
                 </p>
-              </div>
 
-              <div className="flex justify-between items-center mt-1">
-                <Price
-                  price={product.price}
-                  solde={product.solde}
-                  newprice={product.newprice}
-                />
-                
-                  <div className="max-sm:hidden">
 
-                    <HeartFavorite
-                      product={product}
-                      updateSignedInUser={updateSignedInUser}
-                    />
-                  </div>
+                <div className="flex  flex-row mt-1 gap-3">
+                  <Price
+                    price={product.price}
+                    solde={product.solde}
+                    newprice={product.newprice}
+                  />
+                  <HeartFavorite
+                    product={product}
+                    updateSignedInUser={updateSignedInUser}
+                  />
+                      {/*onClick={() => {
+                      cart.addItem({
+                        item: product,
+                        quantity : 1,
+                        color: selectedColor,
+                        size: selectedSize,
+                      });
+                    }}
+                   
+                  <ShoppingCart
+                    className="text-[#f7a691]" />*/}
+                </div>
               </div>
             </div>
           </div>
@@ -165,7 +174,7 @@ const ProductCard = ({ product, updateSignedInUser }: ProductCardProps) => {
           <>
 
             <div className="relative">
-              {!isCollection ?
+              {!isCollection && !isSearch  ?
                 <div
                   className="absolute z-20 pointer-events-none"
                   style={{
@@ -214,6 +223,8 @@ const ProductCard = ({ product, updateSignedInUser }: ProductCardProps) => {
                 alt="product"
                 width={250}
                 height={300}
+                                style={{ borderBottomRightRadius: imageBorderRadius }}
+
                 className="grayscale h-[250px] rounded-lg object-cover"
               />
               <Image
@@ -224,7 +235,7 @@ const ProductCard = ({ product, updateSignedInUser }: ProductCardProps) => {
                 height={200}
               />
             </div>
-            <div className="w-full max-sm:w-64  rounded-xl  shadow-sm p-4 bg-white bg-opacity-20 relative ">
+            <div className="w-full max-sm:w-fit  rounded-xl  shadow-sm p-4 bg-white bg-opacity-20 relative ">
 
               <div className=" text-start">
                 <p className="text-base-bold">{product.title}</p>
@@ -233,10 +244,10 @@ const ProductCard = ({ product, updateSignedInUser }: ProductCardProps) => {
                 </p>
               </div>
 
-              <div className="flex justify-between items-center">
+              <div className="flex  max-sm:w-fit  justify-between items-center gap-3">
                 <p className="text-body-bold">{formatDZD(product.price)}</p>
                 <p className="text-red-500 text-small-bold">Epuisé</p>
-                <div className="max-sm:hidden">
+                <div >
                   <HeartFavorite
                     product={product}
                     updateSignedInUser={updateSignedInUser}

@@ -14,6 +14,11 @@ export const getCollectionss = async () => {
   }
 };
 
+export const getColls = async () => {
+  const colls = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/colls`)
+  return await colls.json()
+}
+
 export const getCollectionDetails = async (collectionId: string) => {
   const collection = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/collections/${collectionId}`)
   return await collection.json()

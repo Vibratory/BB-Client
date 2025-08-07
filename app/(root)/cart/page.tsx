@@ -218,11 +218,10 @@ const Cart = () => {
           Sommaire <span>{`(${cart.cartItems.length} ${cart.cartItems.length > 1 ? "articles" : "article"})`}</span>
         </p>
 
-        <div className="flex justify-between text-body-semibold">
-          <span>Total : </span>
-          <span>{formatDZD(totalRounded)}</span>
-          <span>Livraison : </span>
-          <span>400 DA </span>
+        <div className="flex flex-col justify-between text-body-semibold gap-y-3">
+          <span>Total : {formatDZD(totalRounded)} </span>
+          
+          <span>Livraison : 400 DA </span>
         </div>
 
         <CheckoutForm ref={checkoutRef} getdata={getdata} />

@@ -14,7 +14,7 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import { getCollectionss } from "@/lib/actions/actions";
-
+import { CategoryMenu } from "./CategoryHover";
 
 
 const Navbar = () => {
@@ -24,10 +24,8 @@ const Navbar = () => {
   const cart = useCart();
 
   const [dropdownMenu, setDropdownMenu] = useState(false);
-  const [categoryMenu, setCategoryMenu] = useState(false);
   const [collections, setCollections] = useState([]);
   const [query, setQuery] = useState("");
-  const categoryMenuRef = useRef<HTMLDivElement>(null);
   const dropdownMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,13 +39,6 @@ const Navbar = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
-
-      if (
-        categoryMenuRef.current &&
-        !categoryMenuRef.current.contains(target)
-      ) {
-        setCategoryMenu(false);
-      }
 
       if (
         dropdownMenuRef.current &&
@@ -66,7 +57,6 @@ const Navbar = () => {
 
 
   useEffect(() => {
-    setCategoryMenu(false);
     setDropdownMenu(false);
   }, [pathname]);
 
@@ -94,36 +84,9 @@ const Navbar = () => {
         </Link>
 
         {/* Category Menu */}
-        <div ref={categoryMenuRef}
-          className="relative " >
+        <CategoryMenu
+          collection={collections} />
 
-          <p
-            className="cursor-pointer text-white hover:text-[#29465b]"
-            onClick={() => setCategoryMenu(!categoryMenu)}>
-
-            Catégories
-
-          </p>
-
-          {categoryMenu && (
-            <div className="absolute top-12 right-0 flex flex-col gap-2 p-3 rounded-lg border bg-[#77c0bf] text-base-bold shadow-lg z-50"
-            >
-              {collections.length === 0 ? (
-                <p className="text-white">No categories found</p>
-              ) : (
-                collections.map((collection: CollectionType) => (
-                  <Link
-                    key={collection._id}
-                    href={`/collections/${collection._id}`}
-                    className="text-white hover:text-[#29465b]"
-                  >
-                    {collection.title}
-                  </Link>
-                ))
-              )}
-            </div>
-          )}
-        </div>
 
         <Link
           href={user ? "/wishlist" : "/sign-in"}
@@ -142,15 +105,21 @@ const Navbar = () => {
       </div>
 
       {/* Search */}
-      <div className="bg-white flex gap-3  px-3 py-1 items-center rounded-lg">
+      <div className="bg-white flex gap-3 px-3 py-1 items-center rounded-lg">
         <input
           className="outline-none max-sm:max-w-[120px]"
           placeholder="Rechercher..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              router.push(`/search/${query}`) // or whatever your function is
+            }
+          }}
         />
-        <button
-          disabled={query === ""}
+        < button
+          disabled={query === ""
+          }
           onClick={() => router.push(`/search/${query}`)}
         >
           <Search className="cursor-pointer h-4 w-4 text-[#29465b]" />
@@ -182,10 +151,13 @@ const Navbar = () => {
             </Link>
             <Link href={user ? "/wishlist" : "/sign-in"} className="text-white hover:text-[#29465b]">Wishlist</Link>
             <Link href={user ? "/orders" : "/sign-in"} className="text-white hover:text-[#29465b]">Commandes</Link>
+            <CategoryMenu
+              collection={collections} />
             <Link href="/cart" className="flex items-center gap-3 rounded-lg px-2 py-1 hover:bg-[#29465b] hover:text-white">
               <ShoppingCart className="text-white" />
               <p className="text-white text-base-bold">Panier ({cart.cartItems.length})</p>
             </Link>
+
           </div>
         )}
 

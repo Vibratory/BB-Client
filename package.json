@@ -12,6 +12,7 @@
     "@clerk/nextjs": "^5.7.3",
     "@hookform/resolvers": "^5.1.1",
     "@stripe/stripe-js": "^3.0.6",
+    "@vercel/analytics": "^1.5.0",
     "daisyui": "^5.0.46",
     "lucide-react": "^0.341.0",
     "mongoose": "^8.2.0",

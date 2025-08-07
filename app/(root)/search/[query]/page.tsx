@@ -7,12 +7,12 @@ const SearchPage = async ({ params }: { params: { query: string } }) => {
   const decodedQuery = decodeURIComponent(params.query)
 
   return (
-    <div className='px-10 py-5'>
+    <div className='sm:px-10 px-2 py-5'>
       <p className='text-heading3-bold my-10'>Résultat pour la recherche : {decodedQuery}</p>
       {!searchedProducts || searchedProducts.length === 0 && (
         <p className='text-body-bold my-5'>Aucun résultat trouvé pour :</p>
       )}
-      <div className='flex flex-wrap justify-between gap-16'>
+      <div className='flex flex-wrap justify-center gap-16'>
 
         <SortedFiltered
           products={searchedProducts} />

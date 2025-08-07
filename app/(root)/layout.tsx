@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import ToasterProvider from "@/lib/providers/ToasterProvider";
 import { Open_Sans, Tsukimi_Rounded } from 'next/font/google';
 import Footer from "@/components/Footer";
-
+import { Analytics } from "@vercel/analytics/next"
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -39,7 +39,8 @@ export default function RootLayout({
           <ToasterProvider />
           <Navbar />
           {children}
-           <Footer/>
+          <Analytics />
+          <Footer />
         </ClerkProvider>
       </body>
     </html>
